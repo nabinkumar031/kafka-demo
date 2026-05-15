@@ -1,0 +1,24 @@
+{
+  "namespace": "com.example.kafkademo.avro",
+  "type": "record",
+  "name": "OrderEvent",
+  "fields": [
+    {
+      "name": "orderId",
+      "type": "string"
+    },
+    {
+      "name": "customerId",
+      "type": "string"
+    },
+    {
+      "name": "status",
+      "type": "string"
+    },
+    {
+      "name": "priority",
+      "type": ["null", "string"],
+      "default": null
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: kafka-demo
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: kafka-demo
+
+  template:
+    metadata:
+      labels:
+        app: kafka-demo
+
+    spec:
+      containers:
+        - name: kafka-demo
+
+          image: nabin0508/kafka-demo:1.0
+
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 8081
+
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              value: "host.docker.internal:39092"
+            - name: SCHEMA_REGISTRY_URL
+              value: "http://host.docker.internal:8085"
+
+            - name: INSTANCE_NAME
+              value: "k8s-instance-1"
