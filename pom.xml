@@ -81,6 +81,13 @@
 		</dependency>
 
 		<!-- Avro dependencies ends-->
+
+		<!-- Actuator Starts-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<!-- Actuator Ends-->
 	</dependencies>
 
 	<build>

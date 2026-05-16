@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: kafka-demo-prod-config
+
+data:
+  SPRING_KAFKA_BOOTSTRAP_SERVERS: "host.docker.internal:39092"
+  SCHEMA_REGISTRY_URL: "http://host.docker.internal:8085"
+  SPRING_PROFILES_ACTIVE: "prod"
+  ORDER_TOPIC_NAME: "orders"
+  ORDER_DLQ_TOPIC_NAME: "orders-dlq"

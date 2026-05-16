@@ -26,6 +26,6 @@ public class OrderController {
 
         producer.sendMessage(orderEvent);
 
-        return "Order sent to Kafka";
+        return "Version 2 : Order sent to Kafka";
     }
 }
