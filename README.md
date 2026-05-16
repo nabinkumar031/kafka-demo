@@ -144,6 +144,12 @@ docker run -d --name schema-registry --network kafka-net ^
 -e SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS=PLAINTEXT://kafka:9092 ^
 confluentinc/cp-schema-registry
 ```
+Validation:
+
+```text
+http://localhost:8085/subjects
+http://localhost:8085/subjects/orders-value/versions/latest
+```
 
 ---
 
