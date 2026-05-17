@@ -284,6 +284,95 @@ Windows Host Machine
 ```
 
 ---
+# Monitoring & Observability
+
+Metrics are exposed using Spring Boot Actuator + Micrometer.
+
+Prometheus scrapes metrics from:
+
+/actuator/prometheus
+
+Grafana dashboards visualize:
+
+- JVM Memory Usage
+- CPU Usage
+- HTTP Requests
+- Running Pod Count
+- Kafka Demo Pod Health
+
+---
+
+## Prometheus Targets
+
+Prometheus discovers Kafka Demo pods using:
+
+ServiceMonitor
+↓
+Service Labels
+↓
+Pod Labels
+↓
+Metrics Endpoint
+
+---
+
+## Grafana Dashboard Panels
+
+Implemented panels:
+
+- JVM Memory Usage
+- HTTP Request Count
+- Running kafka-demo Pods
+- CPU Usage
+- Live Threads
+---
+
+# Kubernetes Components Used
+
+| Component | Purpose |
+|---|---|
+| Deployment | Manage application pods |
+| Service | Expose pods internally/externally |
+| ConfigMap | Externalized configuration |
+| Secret | Sensitive configuration |
+| ServiceMonitor | Prometheus metrics discovery |
+| Liveness Probe | Restart unhealthy pods |
+| Readiness Probe | Route traffic only to healthy pods |
+
+---
+
+# Prometheus Service Discovery
+
+Prometheus does not directly scrape Pods.
+
+Discovery flow:
+
+ServiceMonitor
+↓
+Service Labels
+↓
+Pod Labels
+↓
+Metrics Endpoint
+
+Important learnings:
+
+- ServiceMonitor matches Service labels
+- Service selects Pod labels
+- Prometheus scrapes `/actuator/prometheus`
+- Port names in Kubernetes Service are important
+
+---
+# Monitoring URLs
+
+| Component | URL |
+|---|---|
+| Grafana | http://localhost:3000 |
+| Prometheus | http://localhost:9090 |
+| Kafka UI | http://localhost:8080 |
+| Health Endpoint | http://localhost:8081/actuator/health |
+| Prometheus Metrics | http://localhost:8081/actuator/prometheus |
+---
 # Learning Outcomes
 
 * Kafka producer/consumer
@@ -298,14 +387,14 @@ Windows Host Machine
 * Kafka rebalancing
 
 ---
-
 # Future Enhancements
 
-* Rolling deployments
-* ConfigMaps and Secrets
-* Prometheus + Grafana
-* Helm charts
-* CI/CD pipeline
-* Kafka Streams
-* OpenTelemetry tracing
-* Exactly-once semantics
+- Helm Charts
+- Grafana Alerts
+- Horizontal Pod Autoscaler (HPA)
+- CI/CD Pipeline
+- Kafka Transactions
+- OpenTelemetry Tracing
+- Distributed Tracing
+- Kafka Streams
+- Exactly Once Semantics

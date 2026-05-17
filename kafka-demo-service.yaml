@@ -4,6 +4,9 @@ kind: Service
 metadata:
   name: kafka-demo-service
 
+  labels:
+    app: kafka-demo
+
 spec:
   type: NodePort
 
@@ -11,6 +14,7 @@ spec:
     app: kafka-demo
 
   ports:
-    - port: 8081
+    - name: http
+      port: 8081
       targetPort: 8081
       nodePort: 30081
