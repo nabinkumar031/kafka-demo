@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+
+metadata:
+  name: kafka-demo-monitor
+  labels:
+    release: monitoring
+
+spec:
+  selector:
+    matchLabels:
+      app: kafka-demo
+
+  endpoints:
+    - port: http
+      path: /actuator/prometheus
+      interval: 15s

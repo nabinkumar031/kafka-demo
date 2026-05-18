@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: kafka-demo
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+
+  strategy:
+    type: RollingUpdate
+
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+
+  selector:
+    matchLabels:
+      app: kafka-demo
+
+  template:
+    metadata:
+      labels:
+        app: kafka-demo
+
+    spec:
+      containers:
+        - name: kafka-demo
+
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          ports:
+            - containerPort: 8081
+
+          env:
+            - name: INSTANCE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+
+          envFrom:
+            - configMapRef:
+                name: kafka-demo-prod-config
+
+            - secretRef:
+                name: kafka-demo-secret
+
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8081
+
+            initialDelaySeconds: 30
+            periodSeconds: 10
+
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8081
+
+            initialDelaySeconds: 15
+            periodSeconds: 5

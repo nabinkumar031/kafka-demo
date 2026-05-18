@@ -1,0 +1,12 @@
+replicaCount: 2
+
+image:
+  repository: nabin0508/kafka-demo
+  pullPolicy: Always
+  tag: 1.4
+
+service:
+  type: NodePort
+  port: 8081
+  targetPort: 8081
+  nodePort: 30081

@@ -363,6 +363,10 @@ Important learnings:
 - Port names in Kubernetes Service are important
 
 ---
+## Grafana Dashboard
+
+![Grafana Dashboard](screenshots/grafana-dashboard.png)
+---
 # Monitoring URLs
 
 | Component | URL |
@@ -372,7 +376,26 @@ Important learnings:
 | Kafka UI | http://localhost:8080 |
 | Health Endpoint | http://localhost:8081/actuator/health |
 | Prometheus Metrics | http://localhost:8081/actuator/prometheus |
+
 ---
+# Helm Chart
+
+```bash
+
+helm create kafka-demo-chart
+helm template kafka-demo ./kafka-demo-chart
+helm install kafka-demo ./kafka-demo-chart
+
+helm list
+kubectl get all
+
+helm upgrade kafka-demo ./kafka-demo-chart
+helm rollback kafka-demo 1
+helm upgrade kafka-demo ./kafka-demo-chart --set replicaCount=2
+helm install kafka-demo ./kafka-demo-chart -f values-prod.yaml
+```
+---
+
 # Learning Outcomes
 
 * Kafka producer/consumer
