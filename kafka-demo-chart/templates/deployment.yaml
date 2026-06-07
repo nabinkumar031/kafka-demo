@@ -52,7 +52,7 @@ spec:
               path: /actuator/health
               port: 8081
 
-            initialDelaySeconds: 30
+            initialDelaySeconds: 60
             periodSeconds: 10
 
           readinessProbe:
@@ -60,5 +60,14 @@ spec:
               path: /actuator/health
               port: 8081
 
-            initialDelaySeconds: 15
+            initialDelaySeconds: 30
             periodSeconds: 5
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
